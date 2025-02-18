@@ -14,7 +14,7 @@
 
 Contact::Contact() {}
 
-Contact Contact::CreateContact()
+Contact CreateContact()
 {
 	Contact contact;
 	string input;

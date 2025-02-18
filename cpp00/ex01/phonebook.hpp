@@ -29,7 +29,6 @@ private:
 
 public:
 	Contact();
-	Contact CreateContact();
 
 	void SetFirstName(const string &name);
 	void SetLastName(const string &name);
@@ -43,6 +42,8 @@ public:
 	string GetPhoneNumber() const;
 	string GetDarkestSecret() const;
 };
+
+Contact CreateContact();
 
 class Phonebook
 {
