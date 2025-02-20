@@ -21,39 +21,39 @@ Contact CreateContact()
 {
 	Contact contact;
 	std::string input;
-    bool isValid;
+	bool isValid;
 	
-    const std::string fields[] = {
-        "First Name",
-        "Last Name",
-        "Nickname",
-        "Phone Number",
-        "Darkest Secret"
-    };
-    
-    void (Contact::*setters[])(const std::string&) = {
-        &Contact::SetFirstName,
-        &Contact::SetLastName,
-        &Contact::SetNickname,
-        &Contact::SetPhoneNumber,
-        &Contact::SetDarkestSecret
-    };
-    
-    do {
-        isValid = true;
-        for (int i = 0; i < 5; i++) {
-            std::cout << "Enter " << fields[i] << ": ";
-            getline(std::cin, input);
-            if (input.empty()) {
-                std::cout << "Error: " << fields[i] << " cannot be empty\n";
-                isValid = false;
-                break;
-            }
-            (contact.*setters[i])(input);
-        }
-    } while (!isValid);
+	const std::string fields[] = {
+		"First Name",
+		"Last Name",
+		"Nickname",
+		"Phone Number",
+		"Darkest Secret"
+	};
 
-    return contact;
+	void (Contact::*setters[])(const std::string&) = {
+		&Contact::SetFirstName,
+		&Contact::SetLastName,
+		&Contact::SetNickname,
+		&Contact::SetPhoneNumber,
+		&Contact::SetDarkestSecret
+	};
+	
+	do {
+		isValid = true;
+		for (int i = 0; i < 5; i++) {
+			std::cout << "Enter " << fields[i] << ": ";
+			getline(std::cin, input);
+			if (input.empty()) {
+				std::cout << "Error: " << fields[i] << " cannot be empty\n";
+				isValid = false;
+				break;
+			}
+			(contact.*setters[i])(input);
+		}
+	} while (!isValid);
+
+	return contact;
 }
 
 // Setter and Getter functions
