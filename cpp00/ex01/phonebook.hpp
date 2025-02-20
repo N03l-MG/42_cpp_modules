@@ -6,44 +6,41 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:19:01 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/02/18 17:58:56 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:29:20 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
-#include <string>
-#include <iostream>
-#include <iomanip>
-using namespace std;
+# include <string>
+# include <iostream>
+# include <iomanip>
 
 class Contact 
 {
 private:
-	string firstName;
-	string lastName;
-	string nickname;
-	string phoneNumber;
-	string darkestSecret;
+	std::string firstName;
+	std::string lastName;
+	std::string nickname;
+	std::string phoneNumber;
+	std::string darkestSecret;
 
 public:
 	Contact();
 
-	void SetFirstName(const string &name);
-	void SetLastName(const string &name);
-	void SetNickname(const string &nick);
-	void SetPhoneNumber(const string &number);
-	void SetDarkestSecret(const string &secret);
+	void SetFirstName(const std::string &name);
+	void SetLastName(const std::string &name);
+	void SetNickname(const std::string &nick);
+	void SetPhoneNumber(const std::string &number);
+	void SetDarkestSecret(const std::string &secret);
 
-	string GetFirstName() const;
-	string GetLastName() const;
-	string GetNickname() const;
-	string GetPhoneNumber() const;
-	string GetDarkestSecret() const;
+	std::string GetFirstName() const;
+	std::string GetLastName() const;
+	std::string GetNickname() const;
+	std::string GetPhoneNumber() const;
+	std::string GetDarkestSecret() const;
 };
-
-Contact CreateContact();
 
 class Phonebook
 {
@@ -53,9 +50,9 @@ private:
 	int currentSize;
 	int oldestIndex;
 
-	string TruncateString(const string& str);
+	std::string TruncateString(const std::string& str);
 	void DisplayContact(const Contact& contact, int index);
-	bool IsValidIndex(const string& input);
+	bool IsValidIndex(const std::string& input);
 
 public:
 	Phonebook();
@@ -64,5 +61,7 @@ public:
 	void SearchContact();
 	void DisplayAllContacts();
 };
+
+Contact CreateContact();
 
 #endif

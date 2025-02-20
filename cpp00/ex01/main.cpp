@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:42:23 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/02/18 17:44:48 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:30:41 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int main ()
 {
 	Phonebook phonebook;
-	string input;
+	std::string input;
 
+	// main program loop
 	while (true)
 	{
-		cout << "\nEnter command (ADD, SEARCH, EXIT): ";
-		getline(cin, input);
+		std::cout << "\nEnter command (ADD, SEARCH, EXIT): ";
+		getline(std::cin, input);
 		if (input == "EXIT") break;
 		else if (input == "ADD") {
 			Contact newContact = CreateContact();
 			phonebook.AddContact(newContact);
-			cout << "Contact added." << endl;
+			std::cout << "Contact added." << std::endl;
 		} else if (input == "SEARCH") {
 			phonebook.SearchContact();
-		} else
-			cout << "Invalid input." << endl;
-		if (cin.eof()) break;
+		}
+		if (std::cin.eof()) break;
 	}
 	return 0;
 }
