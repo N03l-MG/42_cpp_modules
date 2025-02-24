@@ -1,60 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:22:46 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/02/20 17:53:40 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:35:58 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "Contact.hpp"
 
 // Default constructor
 Contact::Contact() {}
-
-// Create a new contact by asking the user for input.
-// If any field is empty, the user will be prompted again
-Contact CreateContact()
-{
-	Contact contact;
-	std::string input;
-	bool isValid;
-	
-	const std::string fields[] = {
-		"First Name",
-		"Last Name",
-		"Nickname",
-		"Phone Number",
-		"Darkest Secret"
-	};
-
-	void (Contact::*setters[])(const std::string&) = {
-		&Contact::SetFirstName,
-		&Contact::SetLastName,
-		&Contact::SetNickname,
-		&Contact::SetPhoneNumber,
-		&Contact::SetDarkestSecret
-	};
-	
-	do {
-		isValid = true;
-		for (int i = 0; i < 5; i++) {
-			std::cout << "Enter " << fields[i] << ": ";
-			getline(std::cin, input);
-			if (input.empty()) {
-				std::cout << "Error: " << fields[i] << " cannot be empty\n";
-				isValid = false;
-				break;
-			}
-			(contact.*setters[i])(input);
-		}
-	} while (!isValid);
-
-	return contact;
-}
 
 // Setter and Getter functions
 void Contact::SetFirstName(const std::string &name)
@@ -82,27 +41,27 @@ void Contact::SetDarkestSecret(const std::string &secret)
 	darkestSecret = secret;
 }
 
-std::string Contact::GetFirstName() const
+std::string Contact::GetFirstName()
 {
 	return firstName;
 }
 
-std::string Contact::GetLastName() const
+std::string Contact::GetLastName()
 {
 	return lastName;
 }
 
-std::string Contact::GetNickname() const
+std::string Contact::GetNickname()
 {
 	return nickname;
 }
 
-std::string Contact::GetPhoneNumber() const
+std::string Contact::GetPhoneNumber()
 {
 	return phoneNumber;
 }
 
-std::string Contact::GetDarkestSecret() const
+std::string Contact::GetDarkestSecret()
 {
 	return darkestSecret;
 }

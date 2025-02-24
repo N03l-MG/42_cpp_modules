@@ -6,15 +6,17 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:42:23 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/02/20 17:30:41 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/02/24 14:42:57 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
+
+Contact CreateContact();
 
 int main ()
 {
-	Phonebook phonebook;
+	PhoneBook phonebook;
 	std::string input;
 
 	// main program loop
@@ -33,4 +35,46 @@ int main ()
 		if (std::cin.eof()) break;
 	}
 	return 0;
+}
+
+// Create a new contact by asking the user for input.
+// If any field is empty, the user will be prompted again
+Contact CreateContact()
+{
+	Contact contact;
+	std::string input;
+	bool isValid;
+	
+	const std::string fields[] = {
+		"First Name",
+		"Last Name",
+		"Nickname",
+		"Phone Number",
+		"Darkest Secret"
+	};
+
+	void (Contact::*setters[])(const std::string&) = {
+		&Contact::SetFirstName,
+		&Contact::SetLastName,
+		&Contact::SetNickname,
+		&Contact::SetPhoneNumber,
+		&Contact::SetDarkestSecret
+	};
+	
+	do {
+		isValid = true;
+		for (int i = 0; i < 5; i++) {
+			std::cout << "Enter " << fields[i] << ": ";
+			getline(std::cin, input);
+			if (std::cin.eof()) break;
+			else if (input.empty()) {
+				std::cout << "Error: " << fields[i] << " cannot be empty\n";
+				isValid = false;
+				break;
+			}
+			(contact.*setters[i])(input);
+		}
+	} while (!isValid);
+
+	return contact;
 }
