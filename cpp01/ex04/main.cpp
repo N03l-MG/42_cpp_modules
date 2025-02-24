@@ -30,14 +30,17 @@ int main(int argc, char **argv)
 	std::ofstream outputFile(filename + ".replace");
 	if (!outputFile) {
 		std::cerr << "Error: could not create file." << std::endl;
+		inputFile.close();
 		return 1;
 	}
 
 	// Cycle though input file and replace s1 with s2 using append and positions of s1
 	std::string line;
+	bool firstLine = true;
 	while (std::getline(inputFile, line))
 	{
 		std::string newLine;
+		if (!firstLine) newLine.append("\n");
 		size_t pos = 0;
 		while (pos < line.size())
 		{
@@ -51,7 +54,8 @@ int main(int argc, char **argv)
 				break;
 			}
 		}
-		outputFile << newLine << std::endl;
+		outputFile << newLine;
+		firstLine = false;
 	}
 
 	// Close files
