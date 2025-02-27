@@ -18,6 +18,10 @@ int main(int argc, char **argv)
 		s1 = argv[2];
 		s2 = argv[3];
 	}
+	if (s1.empty() || s2.empty()) {
+		std::cerr << "Error: empty string/s as arguments." << std::endl;
+		return 1;
+	}
 
 	// Open input file
 	std::ifstream inputFile(filename);
