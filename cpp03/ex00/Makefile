@@ -3,7 +3,7 @@ NAME = ex00
 CMP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp bsp.cpp Fixed.cpp Point.cpp
+SRC = main.cpp ClapTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

@@ -59,7 +59,7 @@ void ClapTrap::setEnergyPoints(unsigned int energyPoints) { this->energyPoints =
 
 void ClapTrap::setAttackDamage(unsigned int attackDamage) { this->attackDamage = attackDamage; }
 
-// Class Methods (will change, these suck.)
+// Class Methods
 
 void ClapTrap::attack(std::string const &target)
 {
@@ -83,7 +83,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		} else {
 			hitPoints = 0;
 			std::cout << "ClapTrap " << name << " takes " << amount
-					  << " points of damage... It's HP has reached 0!" << std::endl;
+					  << " points of damage... It is now broken." << std::endl;
 		}
 	}
 }
@@ -94,7 +94,9 @@ void ClapTrap::beRepaired(unsigned int amount)
 		energyPoints--;
 		hitPoints += amount;
 		std::cout << "ClapTrap " << name << " repairs itself for " << amount
-				  << " of hit points and is now at " << hitPoints<< " HP." << std::endl;
-	} else
-		std::cout << "ClapTrap " << name << " has insufficient energy or HP." << std::endl;
+				  << " HP." << std::endl;
+	} else {
+		std::cout << "ClapTrap " << name << " has insufficient energy or is broken."
+		<< std::endl;
+	}
 }
