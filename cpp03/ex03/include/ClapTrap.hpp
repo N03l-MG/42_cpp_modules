@@ -30,10 +30,10 @@ public:
 	~ClapTrap();
 
 	// Getters & Setters
-	std::string getName();
-	unsigned int getHitPoints();
-	unsigned int getEnergyPoints();
-	unsigned int getAttackDamage();
+	std::string getName() const;
+	unsigned int getHitPoints() const;
+	unsigned int getEnergyPoints() const;
+	unsigned int getAttackDamage() const;
 	void setName(std::string name);
 	void setHitPoints(unsigned int hitPoints);
 	void setEnergyPoints(unsigned int energyPoints);

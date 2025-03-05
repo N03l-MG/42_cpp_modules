@@ -43,13 +43,13 @@ ClapTrap::~ClapTrap()
 
 // Getters & Setters
 
-std::string ClapTrap::getName() { return name; }
+std::string ClapTrap::getName() const { return name; }
 
-unsigned int ClapTrap::getHitPoints() { return hitPoints; }
+unsigned int ClapTrap::getHitPoints() const { return hitPoints; }
 
-unsigned int ClapTrap::getEnergyPoints() { return energyPoints; }
+unsigned int ClapTrap::getEnergyPoints() const { return energyPoints; }
 
-unsigned int ClapTrap::getAttackDamage() { return attackDamage; }
+unsigned int ClapTrap::getAttackDamage() const { return attackDamage; }
 
 void ClapTrap::setName(std::string name) { this->name = name; }
 

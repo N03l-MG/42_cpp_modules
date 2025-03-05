@@ -17,7 +17,7 @@
 
 int main()
 {
-	// okay this got annoying, back to boring mains, sorry
+	// this one is absolutely terrible, no jokes here
 	DiamondTrap diamondtrap("Igosefa");
 	std::cout << std::endl;
 

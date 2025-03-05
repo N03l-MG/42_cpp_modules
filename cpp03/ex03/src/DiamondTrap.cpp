@@ -14,12 +14,15 @@
 
 // Orthodox Canonical Form
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap::ClapTrap(name + "_clap_trap"), ScavTrap(name), FragTrap(name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap::ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name(name)
 {
-	setName(name);
-	setHitPoints(FragTrap::getHitPoints());
-	setEnergyPoints(ScavTrap::getEnergyPoints());
-	setAttackDamage(FragTrap::getAttackDamage());
+	// Despite the subject stating that these values must be inherited, this is impossible
+	// as there is only one ClapTrap grandparent and so the two childs will have the same 
+	// values in memory (essentially one will replace the others when constructed). The
+	// only solution to this is to hard-code the value... Not """inherit""" them.
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(30);
 	std::cout << "DiamondTrap instance " << name << " constructed." << std::endl;
 }
 
@@ -42,31 +45,18 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src)
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "DiamondTrap instance " << getName() << " destroyed." << std::endl;
+	std::cout << "DiamondTrap instance " << getDiamondName() << " destroyed." << std::endl;
 }
 
-// Getter Overrides (diamond inheritance problem solution)
+// Unique name getter for DiamondTrap
 
-std::string ClapTrap::getName() const { return name; }
-
-unsigned int ClapTrap::getHitPoints() { return FragTrap::getHitPoints(); }
-
-unsigned int ClapTrap::getEnergyPoints() { return ScavTrap::getEnergyPoints(); }
-
-unsigned int ClapTrap::getAttackDamage() { return FragTrap::getAttackDamage(); }
-
-// ScavTrap Method Inheritance (only attack)
-
-void DiamondTrap::attack(std::string const &target)
-{
-	ScavTrap::attack(target);
-}
+std::string DiamondTrap::getDiamondName() const { return name;}
 
 // DiamondTrap class method
 
 void DiamondTrap::whoAmI(void)
 {
-	std::cout << "Hello, I am a DiamondTrap named " << getName() <<
-	" and I am the grandchild of the ClapTrap named " << ClapTrap::getName() << "!"
+	std::cout << "Hello, I am a DiamondTrap named " << getDiamondName() <<
+	" and I am the grandchild of the ClapTrap named " << getName() << "!"
 	<< std::endl;
 }

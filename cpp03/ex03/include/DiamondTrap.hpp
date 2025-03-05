@@ -19,20 +19,17 @@
 class DiamondTrap : public ScavTrap, public FragTrap
 {
 	std::string name;
-	// All other private attributes inherited from ClapTrap, through both child classes
+	// All other private attributes inherited from ClapTrap and set (more in cpp)
 public:
 	// OCF constructors and destructor
 	DiamondTrap(std::string name);
 	DiamondTrap(const DiamondTrap &src);
 	DiamondTrap &operator=(const DiamondTrap &src);
 	~DiamondTrap();
-	// Getter overrides
-	std::string getName() const;
-	unsigned int getHitPoints() const;
-	unsigned int getEnergyPoints() const;
-	unsigned int getAttackDamage() const;
-	// ClapTrap Overrides NOT present bcs the subject asks for attack() to come from ScavTrap
-	void attack(std::string const &target);
+	// Unique name getter
+	std::string getDiamondName() const;
+	// Attack method inherited from ScavTrap specifically
+	using ScavTrap::attack;
 	// Class methods
 	void whoAmI();
 };
