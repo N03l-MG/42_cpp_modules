@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:48:35 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/04 18:12:00 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:21:09 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ class ClapTrap
 {
 private:
 	std::string name;
-	int hitPoints;
-	int energyPoints;
-	int attackDamage;
+	unsigned int hitPoints;
+	unsigned int energyPoints;
+	unsigned int attackDamage;
 public:
 	// OCF Defaults
 	ClapTrap(std::string name);

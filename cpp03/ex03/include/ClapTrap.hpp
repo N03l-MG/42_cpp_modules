@@ -6,14 +6,14 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:48:35 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:21:17 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:18:50 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 # define CLAPTRAP_HPP
 
-# include <iostream>
+#include <iostream>
 
 class ClapTrap
 {
@@ -30,10 +30,10 @@ public:
 	~ClapTrap();
 
 	// Getters & Setters
-	std::string getName() const;
-	unsigned int getHitPoints() const;
-	unsigned int getEnergyPoints() const;
-	unsigned int getAttackDamage() const;
+	std::string getName();
+	unsigned int getHitPoints();
+	unsigned int getEnergyPoints();
+	unsigned int getAttackDamage();
 	void setName(std::string name);
 	void setHitPoints(unsigned int hitPoints);
 	void setEnergyPoints(unsigned int energyPoints);

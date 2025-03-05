@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:27:39 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 14:27:40 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:01:17 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <iostream>
 # include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap
+class ScavTrap : virtual public ClapTrap
 {
 	// All private attributes inherited from ClapTrap
 public:

@@ -1,48 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 16:48:35 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:21:17 by nmonzon          ###   ########.fr       */
+/*   Created: 2025/03/05 15:28:36 by nmonzon           #+#    #+#             */
+/*   Updated: 2025/03/05 17:09:14 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
 
-# include <iostream>
+# include "ScavTrap.hpp"
+# include "FragTrap.hpp"
 
-class ClapTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
-private:
 	std::string name;
-	unsigned int hitPoints;
-	unsigned int energyPoints;
-	unsigned int attackDamage;
+	// All other private attributes inherited from ClapTrap, through both child classes
 public:
-	// OCF Defaults
-	ClapTrap(std::string name);
-	ClapTrap(const ClapTrap &src);
-	ClapTrap &operator=(const ClapTrap &src);
-	~ClapTrap();
-
-	// Getters & Setters
+	// OCF constructors and destructor
+	DiamondTrap(std::string name);
+	DiamondTrap(const DiamondTrap &src);
+	DiamondTrap &operator=(const DiamondTrap &src);
+	~DiamondTrap();
+	// Getter overrides
 	std::string getName() const;
 	unsigned int getHitPoints() const;
 	unsigned int getEnergyPoints() const;
 	unsigned int getAttackDamage() const;
-	void setName(std::string name);
-	void setHitPoints(unsigned int hitPoints);
-	void setEnergyPoints(unsigned int energyPoints);
-	void setAttackDamage(unsigned int attackDamage);
-
-	// Class Methods
+	// ClapTrap Overrides NOT present bcs the subject asks for attack() to come from ScavTrap
 	void attack(std::string const &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
+	// Class methods
+	void whoAmI();
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:53:47 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 14:27:25 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:18:56 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ ClapTrap::~ClapTrap()
 
 // Getters & Setters
 
-std::string ClapTrap::getName() const { return name; }
+std::string ClapTrap::getName() { return name; }
 
-unsigned int ClapTrap::getHitPoints() const { return hitPoints; }
+unsigned int ClapTrap::getHitPoints() { return hitPoints; }
 
-unsigned int ClapTrap::getEnergyPoints() const { return energyPoints; }
+unsigned int ClapTrap::getEnergyPoints() { return energyPoints; }
 
-unsigned int ClapTrap::getAttackDamage() const { return attackDamage; }
+unsigned int ClapTrap::getAttackDamage() { return attackDamage; }
 
 void ClapTrap::setName(std::string name) { this->name = name; }
 

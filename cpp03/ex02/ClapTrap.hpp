@@ -6,14 +6,14 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:48:35 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:21:17 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:20:58 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 # define CLAPTRAP_HPP
 
-# include <iostream>
+#include <iostream>
 
 class ClapTrap
 {
