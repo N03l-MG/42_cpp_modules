@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:42:45 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 14:53:34 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:12:14 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,46 @@
 
 // Orthodox Canonical Form Rewrites (of the ClapTrap defaults)
 
-FragTrap::FragTrap(std::string name) : ClapTrap::ClapTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
-	setHitPoints(100);
-	setEnergyPoints(100);
-	setAttackDamage(30);
+	this->hitPoints = 100;
+	this->energyPoints = 100;
+	this->attackDamage = 30;
 	std::cout << "FragTrap instance " << name << " constructed." << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &src) : ClapTrap::ClapTrap(src)
+FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
 	*this = src;
-	std::cout << "FragTrap instance " << getName() << " copied from " << src.getName()
+	std::cout << "FragTrap instance " << name << " copied from " << src.name
 	<< " and constructed." << std::endl;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &src)
 {
 	// std::cout << "Class copy assignment overload called." << std::endl;
-	setName(src.getName());
-	setHitPoints(src.getHitPoints());
-	setEnergyPoints(src.getEnergyPoints());
-	setAttackDamage(src.getAttackDamage());
+	name = src.name;
+	hitPoints = src.hitPoints;
+	energyPoints = src.energyPoints;
+	attackDamage = src.attackDamage;
 	return *this;
 }
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap instance " << getName() << " destroyed." << std::endl;
+	std::cout << "FragTrap instance " << name << " destroyed." << std::endl;
 }
 
 // ClapTrap Method Overrides
 
 void FragTrap::attack(std::string const &target)
 {
-	if (getEnergyPoints() > 0 && getHitPoints() > 0) {
-		setEnergyPoints(getEnergyPoints() - 1);
-		std::cout << "FragTrap " << getName() << " attacks " << target
-		<< ", causing " << getAttackDamage() << " points of damage!" << std::endl;
+	if (energyPoints > 0 && hitPoints > 0) {
+		energyPoints--;
+		std::cout << "FragTrap " << name << " attacks " << target
+		<< ", causing " << attackDamage << " points of damage!" << std::endl;
 	} else {
-		std::cout << "FragTrap " << getName() << " is out of energy or HP."
-		<< std::endl;
-	}
-}
-
-void FragTrap::takeDamage(unsigned int amount)
-{
-	if (amount > 0) {
-		if (getHitPoints() > amount) {
-			setHitPoints(getHitPoints() - amount);
-			std::cout << "FragTrap " << getName() << " takes " << amount
-					  << " points of damage!" << std::endl;
-		} else {
-			setHitPoints(0);
-			std::cout << "FragTrap " << getName() << " takes " << amount
-					  << " points of damage... It is now broken." << std::endl;
-		}
-	}
-}
-
-void FragTrap::beRepaired(unsigned int amount)
-{
-	if (getEnergyPoints() > 0 && getHitPoints() > 0) {
-		setEnergyPoints(getEnergyPoints() - 1);
-		setHitPoints(getHitPoints() + amount);
-		std::cout << "FragTrap " << getName() << " repairs itself for " << amount
-				  << " HP." << std::endl;
-	} else {
-		std::cout << "FragTrap " << getName() << " has insufficient energy or is broken."
+		std::cout << "FragTrap " << name << " is out of energy or HP."
 		<< std::endl;
 	}
 }
@@ -90,5 +62,5 @@ void FragTrap::beRepaired(unsigned int amount)
 
 void FragTrap::highFivesGuys()
 {
-	std::cout << "FragTrap " << getName() << " requests a high-five!" << std::endl;
+	std::cout << "FragTrap " << name << " requests a high-five!" << std::endl;
 }

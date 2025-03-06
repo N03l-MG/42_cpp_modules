@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:28:33 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:17:55 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:57:38 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,60 @@
 
 // Orthodox Canonical Form
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap::ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name(name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name(name)
 {
-	// Despite the subject stating that these values must be inherited, this is impossible
-	// as there is only one ClapTrap grandparent and so the two childs will have the same 
-	// values in memory (essentially one will replace the others when constructed). The
-	// only solution to this is to hard-code the value... Not """inherit""" them.
-	setHitPoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(30);
+	ScavTrap temp("");
+	this->hitPoints = FragTrap::hitPoints;
+	this->attackDamage = FragTrap::attackDamage;
+	this->energyPoints = temp.getEnergyPoints();
 	std::cout << "DiamondTrap instance " << name << " constructed." << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &src) : ClapTrap::ClapTrap(src), ScavTrap(src), FragTrap(src)
+DiamondTrap::DiamondTrap(const DiamondTrap &src) : ClapTrap(src), ScavTrap(src), FragTrap(src)
 {
 	*this = src;
-	std::cout << "DiamondTrap instance " << getName() << " copied from " << src.getName()
+	std::cout << "DiamondTrap instance " << name << " copied from " << src.name
 	<< " and constructed." << std::endl;
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src)
 {
 	// std::cout << "Class copy assignment overload called." << std::endl;
-	setName(src.getName());
-	setHitPoints(src.getHitPoints());
-	setEnergyPoints(src.getEnergyPoints());
-	setAttackDamage(src.getAttackDamage());
+	name = src.name;
+	hitPoints = src.hitPoints;
+	energyPoints = src.energyPoints;
+	attackDamage = src.attackDamage;
 	return *this;
 }
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "DiamondTrap instance " << getDiamondName() << " destroyed." << std::endl;
+	std::cout << "DiamondTrap instance " << name << " destroyed." << std::endl;
 }
 
-// Unique name getter for DiamondTrap
+// Getter and Setter overrides
 
-std::string DiamondTrap::getDiamondName() const { return name;}
+std::string DiamondTrap::getName() const { return this->name; }
+
+unsigned int DiamondTrap::getHitPoints() const { return this->hitPoints; }
+
+unsigned int DiamondTrap::getEnergyPoints() const { return this->energyPoints; }
+
+unsigned int DiamondTrap::getAttackDamage() const { return this->attackDamage; }
+
+void DiamondTrap::setName(std::string name) { this->name = name; }
+
+void DiamondTrap::setHitPoints(unsigned int hitPoints) { this->hitPoints = hitPoints; }
+
+void DiamondTrap::setEnergyPoints(unsigned int energyPoints) { this->energyPoints = energyPoints; }
+
+void DiamondTrap::setAttackDamage(unsigned int attackDamage) { this->attackDamage = attackDamage; }
 
 // DiamondTrap class method
 
 void DiamondTrap::whoAmI(void)
 {
-	std::cout << "Hello, I am a DiamondTrap named " << getDiamondName() <<
-	" and I am the grandchild of the ClapTrap named " << getName() << "!"
+	std::cout << "Hello, I am a DiamondTrap named " << name <<
+	" and I am the grandchild of the ClapTrap named " << ClapTrap::name << "!"
 	<< std::endl;
 }

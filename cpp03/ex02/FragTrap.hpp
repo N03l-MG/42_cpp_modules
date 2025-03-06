@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:42:48 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 14:45:22 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:05:05 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ public:
 	~FragTrap();
 	// ClapTrap Overrides
 	void attack(std::string const &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	// Class methods
 	void highFivesGuys();
 };

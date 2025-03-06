@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:53:47 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:18:56 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:00:43 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ ClapTrap::~ClapTrap()
 	std::cout << "ClapTrap instance " << name << " destroyed." << std::endl;
 }
 
-// Getters & Setters
+// Getters and Setters (for displaying stats in main)
 
 std::string ClapTrap::getName() const { return name; }
 
@@ -58,6 +58,7 @@ void ClapTrap::setHitPoints(unsigned int hitPoints) { this->hitPoints = hitPoint
 void ClapTrap::setEnergyPoints(unsigned int energyPoints) { this->energyPoints = energyPoints; }
 
 void ClapTrap::setAttackDamage(unsigned int attackDamage) { this->attackDamage = attackDamage; }
+
 
 // Class Methods
 

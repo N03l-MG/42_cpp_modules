@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:56:14 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:03:10 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:02:59 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main()
 	std::cout << "Attack Damage: " <<  diamondtrap.getAttackDamage() << std::endl;
 	diamondtrap.guardGate();
 	diamondtrap.highFivesGuys();
-	diamondtrap.attack("the air... "); // ScavTrap will attack, because yes.
+	diamondtrap.attack("the air... ");
 	std::cout << std::endl;
 
 	return 0;

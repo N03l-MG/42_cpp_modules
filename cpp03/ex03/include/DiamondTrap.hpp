@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:28:36 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 17:09:14 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 14:17:24 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,30 @@
 # include "ScavTrap.hpp"
 # include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap
+class DiamondTrap : virtual public ScavTrap, virtual public FragTrap
 {
-	std::string name;
-	// All other private attributes inherited from ClapTrap and set (more in cpp)
-public:
-	// OCF constructors and destructor
-	DiamondTrap(std::string name);
-	DiamondTrap(const DiamondTrap &src);
-	DiamondTrap &operator=(const DiamondTrap &src);
-	~DiamondTrap();
-	// Unique name getter
-	std::string getDiamondName() const;
-	// Attack method inherited from ScavTrap specifically
-	using ScavTrap::attack;
-	// Class methods
-	void whoAmI();
+	private:
+		std::string name;
+		// All other private attributes inherited from parents
+	public:
+		// OCF constructors and destructor
+		DiamondTrap(std::string name);
+		DiamondTrap(const DiamondTrap &src);
+		DiamondTrap &operator=(const DiamondTrap &src);
+		~DiamondTrap();
+		// Getter and Setter overrides (solve parent ambiguity)
+		std::string getName() const;
+		unsigned int getHitPoints() const;
+		unsigned int getEnergyPoints() const;
+		unsigned int getAttackDamage() const;
+		void setName(std::string name);
+		void setHitPoints(unsigned int hitPoints);
+		void setEnergyPoints(unsigned int energyPoints);
+		void setAttackDamage(unsigned int attackDamage);
+		// Attack method inherited from ScavTrap specifically
+		using ScavTrap::attack;
+		// Class methods
+		void whoAmI();
 };
 
 #endif

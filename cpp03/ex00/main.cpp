@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:56:14 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/04 17:01:52 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:15:51 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main()
 	std::cout << std::endl;
 
 	claptrap1.beRepaired(8); // fails bcs energy is already 0 L bozo
-	claptrap2.attack("igor"); // no mercy, f igor all my homies hate igor
+	claptrap2.attack("igor"); // no mercy, all my homies hate igor
 	claptrap1.takeDamage(8); // he dies
 
 	std::cout << "Igor's HP and Energy Points: "<< claptrap1.getHitPoints()

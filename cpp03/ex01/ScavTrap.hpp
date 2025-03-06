@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:27:39 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/05 14:27:40 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/06 15:15:20 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ public:
 	~ScavTrap();
 	// ClapTrap Overrides
 	void attack(std::string const &target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	// Class methods
 	void guardGate();
 };
