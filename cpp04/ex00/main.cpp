@@ -1,9 +1,19 @@
-#include <iostream>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/07 14:39:15 by nmonzon           #+#    #+#             */
+/*   Updated: 2025/03/07 14:39:27 by nmonzon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include <iostream>
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 

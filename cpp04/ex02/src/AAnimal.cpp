@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
+/*   AAnimal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 14:38:44 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/07 14:38:45 by nmonzon          ###   ########.fr       */
+/*   Created: 2025/03/07 14:38:17 by nmonzon           #+#    #+#             */
+/*   Updated: 2025/03/07 16:37:52 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
+#include "AAnimal.hpp"
 
-WrongAnimal::WrongAnimal()
+AAnimal::AAnimal()
 {
-	std::cout << "Base WrongAnimal instance constructed." << std::endl;
+	std::cout << "Abstract Animal constructed." << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &src)
+AAnimal::AAnimal(const AAnimal &src)
 {
+	std::cout << "Abstract Animal copied and constructed." << std::endl;
 	*this = src;
 }
 
-WrongAnimal &WrongAnimal::operator=(const WrongAnimal &src)
+AAnimal &AAnimal::operator=(const AAnimal &src)
 {
 	this->type = src.type;
 	return *this;
 }
 
-WrongAnimal::~WrongAnimal()
+AAnimal::~AAnimal()
 {
-	std::cout << "Base WrongAnimal instance destroyed." << std::endl;
+	std::cout << "Abstract Animal destroyed." << std::endl;
 }
 
-std::string WrongAnimal::getType() const
+std::string AAnimal::getType() const
 {
 	return type;
 }
 
-void WrongAnimal::makeSound() const
-{
-	std::cout << "wrong sound" << std::endl;
-}
+void AAnimal::makeSound() const {}

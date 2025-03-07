@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 14:37:56 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/07 14:37:57 by nmonzon          ###   ########.fr       */
+/*   Created: 2025/03/07 14:37:51 by nmonzon           #+#    #+#             */
+/*   Updated: 2025/03/07 17:08:53 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-# include "Animal.hpp"
+# include <iostream>
 
-class Cat : public Animal
+class AAnimal
 {
+	protected:
+		std::string type;
 	public:
-		Cat();
-		Cat(const Cat &src);
-		Cat &operator=(const Cat &src);
-		~Cat();
-
-		void makeSound() const override;
+	// Orthodox Defaults
+		AAnimal();
+		AAnimal(const AAnimal &src);
+		AAnimal &operator=(const AAnimal &src);
+		virtual ~AAnimal();
+	// Abstract Class Methods
+		std::string getType() const;
+		virtual void makeSound() const = 0;
 };
 
 #endif

@@ -6,36 +6,50 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:38:29 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/03/07 14:38:29 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/03/07 17:04:30 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Dog.hpp"
 
-Dog::Dog() : Animal()
+// OCF Defaults
+
+Dog::Dog() : AAnimal(), brain(new Brain())
 {
-	this->type = "dog";
+	this->type = "Dog";
 	std::cout << "Dog instance constructed." << std::endl;
 }
 
-Dog::Dog(const Dog &src) : Animal()
+Dog::Dog(const Dog &src) : AAnimal(), brain(new Brain(*(src.brain)))
 {
+	std::cout << "Dog instance copied and constructed." << std::endl;
 	*this = src;
 }
 
 Dog &Dog::operator=(const Dog &src)
 {
-	this->type = src.type;
+	AAnimal::operator=(src);
+	if (brain)
+		delete brain;
+	brain = new Brain(*src.brain);
 	return *this;
 }
 
 Dog::~Dog()
 {
 	std::cout << "Dog instance destroyed." << std::endl;
+	delete brain;
 }
+
+// Class method
 
 void Dog::makeSound() const
 {
 	std::cout << "wau" << std::endl;
+}
+
+Brain *Dog::getBrain() const
+{
+	return brain;
 }
