@@ -52,7 +52,7 @@ std::string Brain::getIdea(size_t index) const
 
 void Brain::setIdea(size_t index, std::string ideaString)
 {
-	if (index >= 0 && index < 100) {
+	if (index < 100) {
 		this->ideas[index].assign(ideaString);
 		return;
 	}
