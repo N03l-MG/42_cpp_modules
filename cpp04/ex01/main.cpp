@@ -24,8 +24,22 @@ int main()
 	delete j;
 	delete i;
 	std::cout << std::endl;
+
+	std::cout << "~~ Subject's Main: (Array Test) ~~" << std::endl;
+	const int arraySize = 10;
+	Animal* animals[arraySize];
+	// Fill half with Dogs and half with Cats
+	for (int i = 0; i < arraySize / 2; ++i)
+		animals[i] = new Dog();
+	for (int i = arraySize / 2; i < arraySize; ++i)
+		animals[i] = new Cat();
+	// Delete all animals
+	for (int i = 0; i < arraySize; ++i)
+		delete animals[i];
+	std::cout << std::endl;
 	
-	// Everything from this point is all my own.
+	// Everything from this point is my own tests.
+	std::cout << std::endl;
 	std::cout << "~~ Sound Tests: ~~" << std::endl;
 	const Cat garfield;
 	const Dog odie;
@@ -59,7 +73,7 @@ int main()
 	std::cout << c->getBrain()->getIdea(1) << std::endl;
 	std::cout << d->getBrain()->getIdea(99) << std::endl;
 	std::cout << std::endl;
-	
+
 	// Heap allocations destroyed
 	delete c;
 	delete d;
