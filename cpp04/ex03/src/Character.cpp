@@ -43,6 +43,8 @@ Character::~Character()
 		if (inventory[i])
 			delete inventory[i];
 	}
+	// for (AMateria* materia : floor)
+	// 	delete materia;
 	std::cout << "Character: " << name << " destroyed." << std::endl;
 }
 
@@ -57,6 +59,7 @@ void Character::equip(AMateria* m)
 	{
 		if (!inventory[i]) {
 			inventory[i] = m;
+			std::cout << name << " equiped " << m->getType() << " materia." << std::endl;
 			return;
 		}
 	}
@@ -65,8 +68,9 @@ void Character::equip(AMateria* m)
 void Character::unequip(int idx)
 {
 	if ((idx >= 0 && idx < 4) && inventory[idx]) {
+		//floor.push_back(inventory[idx]);
+		std::cout << name << " dropped " << inventory[idx]->getType() << " materia on the floor." << std::endl;
 		this->inventory[idx] = nullptr;
-		return;
 	}
 }
 
@@ -78,11 +82,12 @@ void Character::use(int idx, ICharacter &target)
 
 void Character::printInventory()
 {
+	std::cout << name << "'s Inventory:" << std::endl;
 	for (size_t i = 0; i < 4; i++)
 	{
 		if (inventory[i] == nullptr)
-			std::cout << i << ": Empty" << std::endl;
+			std::cout << "\t" << i << ": Empty" << std::endl;
 		else
-			std::cout << i << ": " << inventory[i]->getType() << std::endl;
+			std::cout << "\t" << i << ": " << inventory[i]->getType() << std::endl;
 	}
 }

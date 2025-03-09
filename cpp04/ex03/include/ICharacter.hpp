@@ -14,7 +14,8 @@ class ICharacter
 		virtual void unequip(int idx) = 0;
 		virtual void use(int idx, ICharacter& target) = 0;
 
-		virtual void printInventory() = 0; // my own for debugging
+		virtual void printInventory() = 0; // My own for extra debugging!
+		// Had to add it here because of the way the official main is written.
 };
 
 #endif
