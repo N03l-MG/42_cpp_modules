@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-// Orthodox Canonical Form
-Form::Form() : name("Default"), isSigned(false), gradeToSign(150), gradeToExecute(150)
+// Orthodox Canonical AForm
+AForm::AForm() : name("Default"), isSigned(false), gradeToSign(150), gradeToExecute(150)
 {
-	std::cout << "Default Form instance constructed." << std::endl;
+	std::cout << "Default Abstract Form instance constructed." << std::endl;
 }
 
-Form::Form(const Form &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
+AForm::AForm(const AForm &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
 {
-	std::cout << "Form instance copy-constructed." << std::endl;
+	std::cout << "Abstract Form instance copy-constructed." << std::endl;
 	*this = src;
 }
 
-Form &Form::operator=(const Form &src)
+AForm &AForm::operator=(const AForm &src)
 {
 	if (this != &src)
 		this->isSigned = src.getIsSigned();
@@ -32,48 +32,48 @@ Form &Form::operator=(const Form &src)
 	return *this;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	std::cout << "Form instance destroyed." << std::endl;
+	std::cout << "Abstract Form instance destroyed." << std::endl;
 }
 
 // Parameterized constructor
-Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
+AForm::AForm(const std::string &name, int gradeToSign, int gradeToExecute)
 	: name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
 {
 	if (gradeToSign < 1 || gradeToExecute < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
-		throw Form::GradeTooLowException();
-	std::cout << "Parameterized Form instance constructed." << std::endl;
+		throw AForm::GradeTooLowException();
+	std::cout << "Parameterized Abstract Form instance constructed." << std::endl;
 }
 
 // Getters
-const std::string &Form::getName() const
+const std::string &AForm::getName() const
 {
 	return name;
 }
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {
 	return isSigned;
 }
 
-int Form::getGradeToSign() const
+int AForm::getGradeToSign() const
 {
 	return gradeToSign;
 }
 
-int Form::getGradeToExecute() const
+int AForm::getGradeToExecute() const
 {
 	return gradeToExecute;
 }
 
 // Methods
-void Form::beSigned(const Bureaucrat &bureaucrat)
+void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > gradeToSign)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	if (isSigned) {
 		std::cout << bureaucrat.getName() << " cannot sign " << name << " because it is already signed." << std::endl;
 		return;
@@ -83,18 +83,18 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
 }
 
 //	Exceptions
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return "Grade is too high!";
 }
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return "Grade is too low!";
 }
 
 // Insertion operator overload
-std::ostream &operator<<(std::ostream &os, Form const &src)
+std::ostream &operator<<(std::ostream &os, AForm const &src)
 {
 	os << src.getName() << ", form grade to sign " << src.getGradeToSign() << ", form grade to execute " << src.getGradeToExecute() << ", signed: " << (src.getIsSigned() ? "yes" : "no") << std::endl;
 	return os;

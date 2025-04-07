@@ -3,8 +3,9 @@ NAME = ex02
 CMP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++17 -Iinclude
 
-SRC = 
-OBJ_DIR = obj
+SRC = main.cpp src/Bureaucrat.cpp src/AForm.cpp \
+	  src/PresidentialPardonForm.cpp src/RobotomyRequestForm.cpp src/ShrubberyCreationForm.cpp
+OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(OBJ_DIR) $(NAME)
