@@ -8,10 +8,10 @@ SRC = main.cpp src/Bureaucrat.cpp src/AForm.cpp \
 OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-all: $(OBJ_DIR) $(NAME) info
+all: info $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)/src
+	@mkdir -p $(OBJ_DIR)/src
 
 $(OBJ_DIR)/%.o: %.cpp
 	@$(CMP) $(FLAGS) -c $< -o $@
