@@ -14,9 +14,12 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include "AForm.hpp"
+# include <fstream>
 
 class ShrubberyCreationForm : public AForm
 {
+	private:
+		std::string target;
 	public:
 		// Orthodox Canonical Form
 		ShrubberyCreationForm();
@@ -27,8 +30,18 @@ class ShrubberyCreationForm : public AForm
 		// Parameterized constructor
 		ShrubberyCreationForm(const std::string &target);
 
+		// Getters
+		std::string getTarget() const;
+
 		// Methods
 		void execute(const Bureaucrat &executor) const;
+
+		// Exception classes
+		class OpenFileExeption : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
 };
 
 #endif

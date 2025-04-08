@@ -15,12 +15,12 @@
 // Orthodox Canonical AForm
 AForm::AForm() : name("Default"), isSigned(false), gradeToSign(150), gradeToExecute(150)
 {
-	std::cout << "Default Abstract Form instance constructed." << std::endl;
+	std::cout << BOLD GREEN "Default Abstract Form constructed." RESET << std::endl;
 }
 
 AForm::AForm(const AForm &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
 {
-	std::cout << "Abstract Form instance copy-constructed." << std::endl;
+	std::cout << BOLD GREEN "Abstract Form copy-constructed." RESET << std::endl;
 	*this = src;
 }
 
@@ -34,7 +34,7 @@ AForm &AForm::operator=(const AForm &src)
 
 AForm::~AForm()
 {
-	std::cout << "Abstract Form instance destroyed." << std::endl;
+	std::cout << BOLD MAGENTA "Abstract Form destroyed." RESET << std::endl;
 }
 
 // Parameterized constructor
@@ -45,7 +45,7 @@ AForm::AForm(const std::string &name, int gradeToSign, int gradeToExecute)
 		throw AForm::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
 		throw AForm::GradeTooLowException();
-	std::cout << "Parameterized Abstract Form instance constructed." << std::endl;
+	std::cout << BOLD GREEN "Abstract Form constructed." RESET << std::endl;
 }
 
 // Getters
@@ -74,28 +74,47 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > gradeToSign)
 		throw AForm::GradeTooLowException();
-	if (isSigned) {
-		std::cout << bureaucrat.getName() << " cannot sign " << name << " because it is already signed." << std::endl;
-		return;
-	}
+	if (isSigned)
+		throw AForm::AlreadySignedException();
 	isSigned = true;
 	std::cout << bureaucrat.getName() << " signed " << name << std::endl;
+}
+
+void AForm::execute(const Bureaucrat &executor) const
+{
+	if (!isSigned)
+		throw AForm::NotSignedException();
+	if (executor.getGrade() > gradeToExecute)
+		throw AForm::GradeTooLowException();
+	std::cout << executor.getName() << " executed " << name << std::endl;
 }
 
 //	Exceptions
 const char *AForm::GradeTooHighException::what() const throw()
 {
-	return "Grade is too high!";
+	return BOLD "grade is too high!" RESET;
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-	return "Grade is too low!";
+	return BOLD "grade is too low!" RESET;
+}
+
+const char *AForm::NotSignedException::what() const throw()
+{
+	return BOLD "form is not signed!" RESET;
+}
+
+const char *AForm::AlreadySignedException::what() const throw()
+{
+	return BOLD "form is already signed!" RESET;
 }
 
 // Insertion operator overload
 std::ostream &operator<<(std::ostream &os, AForm const &src)
 {
-	os << src.getName() << ", form grade to sign " << src.getGradeToSign() << ", form grade to execute " << src.getGradeToExecute() << ", signed: " << (src.getIsSigned() ? "yes" : "no") << std::endl;
+	os << BLUE <<src.getName() << ":\tgrade to sign " << src.getGradeToSign() 
+	<< ", grade to execute " << src.getGradeToExecute() << ", signed: "
+	<< (src.getIsSigned() ? "yes" : "no") << RESET;
 	return os;
 }

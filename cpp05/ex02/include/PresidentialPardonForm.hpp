@@ -18,6 +18,8 @@
 
 class PresidentialPardonForm : public AForm
 {
+	private:
+		std::string target;
 	public:
 		// Orthodox Canonical Form
 		PresidentialPardonForm();
@@ -28,8 +30,12 @@ class PresidentialPardonForm : public AForm
 		// Parameterized constructor
 		PresidentialPardonForm(const std::string &target);
 
+		// Getters
+		std::string getTarget() const;
+
 		// Methods
 		void execute(const Bureaucrat &executor) const;
+
 };
 
 #endif

@@ -17,6 +17,8 @@
 
 class RobotomyRequestForm : public AForm
 {
+	private:
+		std::string target;
 	public:
 		// Orthodox Canonical Form
 		RobotomyRequestForm();
@@ -26,6 +28,9 @@ class RobotomyRequestForm : public AForm
 
 		// Parameterized constructor
 		RobotomyRequestForm(const std::string &target);
+
+		// Getters
+		std::string getTarget() const;
 
 		// Methods
 		void execute(const Bureaucrat &executor) const;

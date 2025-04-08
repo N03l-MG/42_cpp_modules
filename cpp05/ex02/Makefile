@@ -8,22 +8,28 @@ SRC = main.cpp src/Bureaucrat.cpp src/AForm.cpp \
 OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-all: $(OBJ_DIR) $(NAME)
+all: $(OBJ_DIR) $(NAME) info
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/src
 
 $(OBJ_DIR)/%.o: %.cpp
-	$(CMP) $(FLAGS) -c $< -o $@
+	@$(CMP) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CMP) $(FLAGS) $(OBJ) -o $(NAME)
+	@$(CMP) $(FLAGS) $(OBJ) -o $(NAME)
+	@printf "Succesfully compiled $(NAME).\n"
+
+info:
+	@printf "Compiling $(NAME)...\n"
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@printf "Cleaned object files.\n"
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@printf "Cleaned executable.\n"
+	@rm -f $(NAME)
 
 re: fclean all
 

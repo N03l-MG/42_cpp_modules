@@ -14,8 +14,10 @@
 # define AFORM_HPP
 
 # include <iostream>
+# include <stdexcept>
 # include <string>
 # include "Bureaucrat.hpp"
+# include "TextFormat.hpp"
 
 class Bureaucrat;
 
@@ -44,7 +46,8 @@ class AForm
 		int getGradeToExecute() const;
 
 		// Methods
-		virtual void beSigned(const Bureaucrat &bureaucrat) = 0;
+		virtual void beSigned(const Bureaucrat &bureaucrat);
+		virtual void execute(const Bureaucrat &executor) const = 0;
 
 		// Exception class overrides
 		class GradeTooHighException : public std::exception
@@ -54,6 +57,18 @@ class AForm
 		};
 
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
+		class NotSignedException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
+		class AlreadySignedException : public std::exception
 		{
 			public:
 				const char *what() const throw();
