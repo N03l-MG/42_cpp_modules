@@ -34,16 +34,16 @@ class AForm
 		AForm();
 		AForm(const AForm &src);
 		AForm &operator=(const AForm &src);
-		~AForm();
+		virtual ~AForm();
 
 		// Parameterized constructor
 		AForm(const std::string &name, int gradeToSign, int gradeToExecute);
 
 		// Getters
-		const std::string &getName() const;
-		bool getIsSigned() const;
-		int getGradeToSign() const;
-		int getGradeToExecute() const;
+		virtual const std::string &getName() const;
+		virtual bool getIsSigned() const;
+		virtual int getGradeToSign() const;
+		virtual int getGradeToExecute() const;
 
 		// Methods
 		virtual void beSigned(const Bureaucrat &bureaucrat);

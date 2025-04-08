@@ -29,6 +29,7 @@ clean:
 
 fclean: clean
 	@printf "Cleaned executable.\n"
+	@rm -f Plantpot_shrubbery
 	@rm -f $(NAME)
 
 re: fclean all
