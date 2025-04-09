@@ -6,21 +6,22 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:57:56 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/04/07 15:56:58 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:14:47 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "TextFormat.hpp"
 
 // Orthodox Canonical Form
 Form::Form() : name("Default"), isSigned(false), gradeToSign(150), gradeToExecute(150)
 {
-	std::cout << "Default Form instance constructed." << std::endl;
+	std::cout << BOLD GREEN "Default Form instance constructed." RESET << std::endl;
 }
 
 Form::Form(const Form &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
 {
-	std::cout << "Form instance copy-constructed." << std::endl;
+	std::cout << BOLD GREEN "Form instance copy-constructed." RESET << std::endl;
 	*this = src;
 }
 
@@ -34,7 +35,7 @@ Form &Form::operator=(const Form &src)
 
 Form::~Form()
 {
-	std::cout << "Form instance destroyed." << std::endl;
+	std::cout << BOLD MAGENTA "Form instance destroyed." RESET << std::endl;
 }
 
 // Parameterized constructor
@@ -45,7 +46,7 @@ Form::Form(const std::string &name, int gradeToSign, int gradeToExecute)
 		throw Form::GradeTooHighException();
 	if (gradeToSign > 150 || gradeToExecute > 150)
 		throw Form::GradeTooLowException();
-	std::cout << "Parameterized Form instance constructed." << std::endl;
+	std::cout << BOLD GREEN "Form instance constructed." RESET << std::endl;
 }
 
 // Getters
@@ -74,10 +75,8 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > gradeToSign)
 		throw Form::GradeTooLowException();
-	if (isSigned) {
-		std::cout << bureaucrat.getName() << " cannot sign " << name << " because it is already signed." << std::endl;
-		return;
-	}
+	if (isSigned)
+		throw Form::AlreadySignedException();
 	isSigned = true;
 	std::cout << bureaucrat.getName() << " signed " << name << std::endl;
 }
@@ -85,17 +84,24 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
 //	Exceptions
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return "Grade is too high!";
+	return BOLD "grade is too high!" RESET;
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return "Grade is too low!";
+	return BOLD "grade is too low!" RESET;
+}
+
+const char *Form::AlreadySignedException::what() const throw()
+{
+	return BOLD "form is already signed!" RESET;
 }
 
 // Insertion operator overload
 std::ostream &operator<<(std::ostream &os, Form const &src)
 {
-	os << src.getName() << ", form grade to sign " << src.getGradeToSign() << ", form grade to execute " << src.getGradeToExecute() << ", signed: " << (src.getIsSigned() ? "yes" : "no") << std::endl;
+	os << BLUE <<src.getName() << ":\tgrade to sign " << src.getGradeToSign() 
+	<< ", grade to execute " << src.getGradeToExecute() << ", signed: "
+	<< (src.getIsSigned() ? "yes" : "no") << RESET;
 	return os;
 }

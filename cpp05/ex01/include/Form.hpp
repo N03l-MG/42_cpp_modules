@@ -6,7 +6,7 @@
 /*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 14:57:53 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/04/07 15:43:20 by nmonzon          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:16:48 by nmonzon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ class Form
 		};
 
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const throw();
+		};
+
+		class AlreadySignedException : public std::exception
 		{
 			public:
 				const char *what() const throw();
