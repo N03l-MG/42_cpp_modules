@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kixik   <github.com/kixikCodes>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 16:59:20 by kixik             #+#    #+#             */
-/*   Updated: 2025/04/09 17:33:26 by kixik            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #pragma once
 
 #include <iostream>
@@ -19,20 +7,30 @@
 
 class ScalarConverter
 {
-	public:
+	private:
 		// OFC
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter &src);
-		ScalarConverter &operator=(const ScalarConverter &src);
-		~ScalarConverter();
+		ScalarConverter() = delete;
+		ScalarConverter(const ScalarConverter &src) = delete;
+		ScalarConverter &operator=(const ScalarConverter &src) = delete;
+		~ScalarConverter() = delete;
+		// Converter Types
+		typedef enum e_type {
+			CHAR,
+			INT,
+			FLOAT,
+			DOUBLE,
+			INVALID
+		} type;
+	public:
 		// Memeber methods
 		static void convert(const std::string &literal);
-		static void printChar(char c);
-		static void printInt(int i);
-		static void printFloat(float f);
-		static void printDouble(double d);
-		static void printCharImpossible();
-		static void printIntImpossible();
-		static void printFloatImpossible();
-		static void printDoubleImpossible();
+		static type get_type(const std::string &literal);
+		static bool isChar(const std::string &literal);
+		static bool isInt(const std::string &literal);
+		static bool isFloat(const std::string &literal);
+		static bool isDouble(const std::string &literal);
+		static void printChar(const std::string &literal);
+		static void printInt(const std::string &literal);
+		static void printFloat(const std::string &literal);
+		static void printDouble(const std::string &literal);
 };
