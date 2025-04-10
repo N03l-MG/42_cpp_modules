@@ -47,15 +47,12 @@ bool ScalarConverter::isInt(const std::string &literal)
 {
 	if (literal.length() == 0)
 		return false;
-	if (literal[0] == '-' || literal[0] == '+') {
+	if (literal[0] == '-' || literal[0] == '+')
 		if (literal.length() == 1)
 			return false;
-	}
 	for (size_t i = 0; i < literal.length(); i++)
-	{
 		if (!isdigit(literal[i]))
 			return false;
-	}
 	try {
 		std::stoi(literal);
 	} catch (std::out_of_range &e) {
@@ -68,15 +65,12 @@ bool ScalarConverter::isFloat(const std::string &literal)
 {
 	if (literal.length() == 0)
 		return false;
-	if (literal[0] == '-' || literal[0] == '+') {
+	if (literal[0] == '-' || literal[0] == '+')
 		if (literal.length() == 1)
 			return false;
-	}
 	for (size_t i = 0; i < literal.length(); i++)
-	{
 		if (!isdigit(literal[i]) && literal[i] != '.' && literal[i] != 'f')
 			return false;
-	}
 	if (literal[literal.length() - 1] != 'f')
 		return false;
 	try {
@@ -91,15 +85,12 @@ bool ScalarConverter::isDouble(const std::string &literal)
 {
 	if (literal.length() == 0)
 		return false;
-	if (literal[0] == '-' || literal[0] == '+') {
+	if (literal[0] == '-' || literal[0] == '+')
 		if (literal.length() == 1)
 			return false;
-	}
 	for (size_t i = 0; i < literal.length(); i++)
-	{
 		if (!isdigit(literal[i]) && literal[i] != '.')
 			return false;
-	}
 	try {
 		std::stod(literal);
 	} catch (std::out_of_range &e) {

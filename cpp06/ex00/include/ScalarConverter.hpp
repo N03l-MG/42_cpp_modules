@@ -8,7 +8,7 @@
 class ScalarConverter
 {
 	private:
-		// OFC
+		// OFC (redundant)
 		ScalarConverter() = delete;
 		ScalarConverter(const ScalarConverter &src) = delete;
 		ScalarConverter &operator=(const ScalarConverter &src) = delete;
