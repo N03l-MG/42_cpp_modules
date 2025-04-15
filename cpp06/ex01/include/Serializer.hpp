@@ -6,9 +6,9 @@
 
 struct Data
 {
-	int integer;
-	float float_val;
-	char chr;
+	int ival;
+	float fval;
+	char c;
 	std::string str;
 };
 

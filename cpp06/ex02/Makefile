@@ -3,7 +3,7 @@ NAME = ex02
 CMP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++17 -Iinclude
 
-SRC = 
+SRC = main.cpp src/Base.cpp
 OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 

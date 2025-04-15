@@ -3,18 +3,18 @@
 
 int	main()
 {
-	Data og_data;
-	Data *result_data;
+	Data ogData;
+	Data *resultData;
 
 
-	og_data.integer = 42;
-	og_data.float_val = 42.42f;
-	og_data.str = "This is the test string!";
-	og_data.chr = 'c';
+	ogData.ival = 42;
+	ogData.fval = 42.42f;
+	ogData.str = "Hello, world!";
+	ogData.c = '*';
 
-	result_data = Serializer::deserialize(Serializer::serialize(&og_data));
+	resultData = Serializer::deserialize(Serializer::serialize(&ogData));
 
-	std::cout << BLUE "OG data:\t" << &og_data << RESET << std::endl;
-	std::cout << BLUE "New data:\t" << result_data << RESET << std::endl;
+	std::cout << BLUE "Original data:\t" << &ogData << RESET << std::endl;
+	std::cout << BLUE "New data:\t" << resultData << RESET << std::endl;
 	return 0;
 }
