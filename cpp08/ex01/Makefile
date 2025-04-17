@@ -1,16 +1,16 @@
-NAME = 
+NAME = ex01
 
 CMP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++17 -Iinclude
 
-SRC = 
+SRC = main.cpp src/Span.cpp
 OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all: info $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/src
 
 $(OBJ_DIR)/%.o: %.cpp
 	@$(CMP) $(FLAGS) -c $< -o $@
@@ -32,4 +32,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re info

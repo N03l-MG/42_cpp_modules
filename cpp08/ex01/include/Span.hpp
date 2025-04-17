@@ -1,12 +1,58 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Span.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmonzon <nmonzon@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 14:12:11 by nmonzon           #+#    #+#             */
-/*   Updated: 2025/04/16 14:12:12 by nmonzon          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <iostream>
+#include <string>
+#include <exception>
+#include <algorithm>
+#include <vector>
+#include <limits>
 
+// Colors
+# define RED       "\x1b[31m ✗ "
+# define GREEN     "\x1b[32m ✓ "
+# define YELLOW    "\x1b[33m ⚠ "
+# define BLUE      "\x1b[34m > "
+# define MAGENTA   "\x1b[35m ⌫ "
+# define CYAN      "\x1b[36m"
+// Styles
+# define BOLD      "\x1b[1m"
+# define UNDERLINE "\x1b[4m\t\t"
+// Format reset
+# define RESET     "\x1b[0m"
+
+class Span
+{
+	private:
+		std::vector<int> numVec;
+		size_t maxSize;
+	public:
+		// OCF
+		Span();
+		Span(unsigned int N);
+		Span(const Span &src);
+		Span &operator=(const Span &src);
+		~Span();
+
+		// Members
+		void addNumber(int num);
+		size_t shortestSpan();
+		size_t longestSpan();
+		void printVector();
+
+		// Exceptions
+		class VectorFullException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return BOLD RED "Vector is already full!" RESET;
+				}
+		};
+
+		class VectorTooSmallException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return BOLD RED "Vector too small!" RESET;
+				}
+		};
+};
