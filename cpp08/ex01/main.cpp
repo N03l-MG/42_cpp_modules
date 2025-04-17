@@ -19,7 +19,6 @@ int main()
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-
 	std::cout << CYAN UNDERLINE "Cannot Add Test:" RESET << std::endl;
 	try {
 		Span defSp; // Default has Max 0.
@@ -29,7 +28,6 @@ int main()
 		std::cerr << RED "Error: " << e.what() << RESET << std::endl; 
 	}
 	std::cout << std::endl;
-
 	std::cout << CYAN UNDERLINE "Vector Too Small Test:" RESET << std::endl;
 	try {
 		Span smallSp = Span(2);
@@ -39,6 +37,17 @@ int main()
 		smallSp.shortestSpan(); // Won't even get here.
 	} catch (const std::exception &e) {
 		std::cerr << RED "Error: " << e.what() << RESET << std::endl; 
+	}
+	std::cout << std::endl;
+	std::cout << CYAN UNDERLINE "10,001 Number test:" RESET << std::endl;
+	{
+		Span bigsp = Span(15000);
+		std::cout << std::endl;
+		for (size_t i = 0; i < 10001; i++)
+			bigsp.addNumber(i);
+		std::cout << BLUE "Longest Span (excpect 10,000):" RESET << std::endl;
+		std::cout << bigsp.longestSpan() << std::endl;
+		std::cout << std::endl;
 	}
 
 	return 0;

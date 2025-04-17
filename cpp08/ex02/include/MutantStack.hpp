@@ -20,8 +20,8 @@
 // Format reset
 #define RESET     "\x1b[0m"
 
-template <typename T, typename Container = std::deque<T>>
-class MutantStack : public std::stack<T, Container>
+template <typename T>
+class MutantStack : public std::stack<T>
 {
 	public:
 		//OCF
@@ -30,8 +30,19 @@ class MutantStack : public std::stack<T, Container>
 		MutantStack &operator=(const MutantStack &src);
 		~MutantStack();
 
-		// Members
-		
+		// Iterator typedefs
+		typedef typename std::stack<T>::container_type::iterator iterator;
+		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+
+		// Members (iterator overrides)
+		iterator begin();
+		iterator end();
+		const_iterator begin() const;
+		const_iterator end() const;
+
+		// Extra [] operator override
+		T &operator[](size_t index);
+		const T &operator[](size_t index) const;
 };
 
 #include "MutantStack.tpp"
