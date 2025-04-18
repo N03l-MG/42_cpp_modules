@@ -57,15 +57,15 @@ typename MutantStack<T>::const_iterator MutantStack<T>::end() const
 template <typename T>
 T& MutantStack<T>::operator[](size_t index)
 {
-    if (index >= this->size())
-        throw std::out_of_range("Index out of bounds");
-    return this->c[index];
+	if (index >= this->size())
+		throw std::out_of_range("Index out of bounds");
+	return this->c[index];
 }
 
 template <typename T>
 const T& MutantStack<T>::operator[](size_t index) const
 {
-    if (index >= this->size())
-        throw std::out_of_range("Index out of bounds");
-    return this->c[index];
+	if (index >= this->size())
+		throw std::out_of_range("Index out of bounds");
+	return this->c[index];
 }
