@@ -3,14 +3,14 @@ NAME = btc
 CMP = c++
 FLAGS = -Wall -Wextra -Werror -std=c++17 -Iinclude
 
-SRC = main.cpp
+SRC = main.cpp src/BitcoinExchange.cpp
 OBJ_DIR = _obj
 OBJ = $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all: info $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/src
 
 $(OBJ_DIR)/%.o: %.cpp
 	@$(CMP) $(FLAGS) -c $< -o $@
