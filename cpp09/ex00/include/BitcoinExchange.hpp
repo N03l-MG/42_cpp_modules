@@ -6,6 +6,7 @@
 #include <limits>
 #include <algorithm>
 #include <fstream>
+#include <regex>
 
 // Colors
 #define RED       "\x1b[31m ✗ "
@@ -36,7 +37,7 @@ class BitcoinExchange
 
 		// Members
 		std::map<std::string, int> ParseDatabase(std::string database);
-		void ValidateInput();
+		bool ValidLine(std::string line);
 		void BTCExchange();
 
 		//Exceptions
@@ -64,6 +65,15 @@ class BitcoinExchange
 				virtual const char *what() const throw()
 				{
 					return RED "Error: " BOLD "Invalid input file!" RESET;
+				}
+		};
+
+		class InvalidInputException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw()
+				{
+					return RED "Error: " BOLD "Invalid input data!" RESET;
 				}
 		};
 };
