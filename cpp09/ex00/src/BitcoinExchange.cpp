@@ -107,7 +107,7 @@ void BitcoinExchange::BTCExchange()
 	std::ifstream inFile(inputFile);
 	if (!inFile)
 		throw InvalidFileException();
-	std::cout << BLUE "Processing file: " RESET << inputFile << std::endl;
+	std::cout << BLUE "Processing file: " BOLD << inputFile << RESET << std::endl;
 
 	std::string line;
 	std::getline(inFile, line); // Skip title line (input file)
