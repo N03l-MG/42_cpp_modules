@@ -7,7 +7,6 @@ int main(int argc, char **argv)
 			throw BitcoinExchange::InvalidArgsException();
 		BitcoinExchange btc("data.csv", argv[1]);
 		std::cout << std::endl;
-		// std::cout << BLUE "Processing file: " RESET << argv[1] << std::endl;
 		btc.BTCExchange();
 		std::cout << std::endl;
 	} catch (const std::exception &e) {

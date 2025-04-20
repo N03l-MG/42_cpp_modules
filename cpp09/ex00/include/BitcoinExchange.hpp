@@ -26,7 +26,7 @@ class BitcoinExchange
 	private:
 		std::string databaseFile;
 		std::string inputFile;
-		std::map<std::string, int> exchangeData;
+		std::map<std::string, float> exchangeData;
 	public:
 		//OCF
 		BitcoinExchange();
@@ -36,44 +36,23 @@ class BitcoinExchange
 		~BitcoinExchange();
 
 		// Members
-		std::map<std::string, int> ParseDatabase(std::string database);
+		std::map<std::string, float> ParseDatabase(std::string database);
 		bool ValidLine(std::string line);
 		void BTCExchange();
 
 		//Exceptions
 		class InvalidArgsException : public std::exception
 		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return RED "Error: " BOLD "Invalid arguments! Please use \"./btc [input file]\"" RESET;
-				}
+			public: const char *what() const throw();
 		};
 
 		class BadDatabaseException : public std::exception
 		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return RED "Error: " BOLD "Could not parse database!" RESET;
-				}
+			public: const char *what() const throw();
 		};
 
 		class InvalidFileException : public std::exception
 		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return RED "Error: " BOLD "Invalid input file!" RESET;
-				}
-		};
-
-		class InvalidInputException : public std::exception
-		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return RED "Error: " BOLD "Invalid input data!" RESET;
-				}
+			public: const char *what() const throw();
 		};
 };

@@ -1,19 +1,22 @@
 #include "BitcoinExchange.hpp"
 
-// Orthodox Canonical Form (default constructor, copy constructor, assignment operator override, destructor)
+// Orthodox Canonical Form
+// (default constructor, copy constructor, assignment operator override, destructor)
 BitcoinExchange::BitcoinExchange() : databaseFile("data.csv"), inputFile("input.txt")
 {
 	exchangeData = ParseDatabase(databaseFile);
 	std::cout << BOLD GREEN "Default BitcoinExchange instance constructed." RESET << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(std::string database, std::string input) : databaseFile(database), inputFile(input)
+BitcoinExchange::BitcoinExchange(std::string database, std::string input)
+: databaseFile(database), inputFile(input)
 {
 	exchangeData = ParseDatabase(databaseFile);
 	std::cout << BOLD GREEN "BitcoinExchange instance constructed." RESET << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &src) : databaseFile(src.databaseFile), inputFile(src.inputFile)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
+: databaseFile(src.databaseFile), inputFile(src.inputFile), exchangeData(src.exchangeData)
 {
 	*this = src;
 	std::cout << BOLD GREEN "BitcoinExchange instance copy-constructed." RESET << std::endl;
@@ -24,6 +27,7 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &src)
 	if (this != &src) {
 		this->databaseFile = src.databaseFile;
 		this->inputFile = src.inputFile;
+		this->exchangeData = src.exchangeData;
 	}
 	return *this;
 }
@@ -34,16 +38,16 @@ BitcoinExchange::~BitcoinExchange()
 }
 
 // Memeber Functions
-std::map<std::string, int> BitcoinExchange::ParseDatabase(std::string database)
+std::map<std::string, float> BitcoinExchange::ParseDatabase(std::string database)
 {
 	std::ifstream db(database);
 	if (!db)
 		throw BadDatabaseException();
 
 	std::string line;
-	std::map<std::string, int> dbMap;
+	std::map<std::string, float> dbMap;
 
-	std::getline(db, line); // Skip title line
+	std::getline(db, line); // Skip title line (database)
 	while (std::getline(db, line))
 	{
 		size_t commaPos = line.find(',');
@@ -66,7 +70,7 @@ std::map<std::string, int> BitcoinExchange::ParseDatabase(std::string database)
 bool BitcoinExchange::ValidLine(std::string line)
 {
 	std::regex dateFormat("\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])");
-	std::regex lineFormat("^([0-9]{4}-[0-9]{2}-[0-9]{2}) \\| ([0-9]*\\.?[0-9]+)$");
+	std::regex lineFormat("^([0-9]{4}-[0-9]{2}-[0-9]{2}) \\| (-?[0-9]*\\.?[0-9]+)$");
 	std::smatch matches;
 
 	if (!std::regex_match(line, matches, lineFormat)) {
@@ -103,13 +107,40 @@ void BitcoinExchange::BTCExchange()
 	std::ifstream inFile(inputFile);
 	if (!inFile)
 		throw InvalidFileException();
+	std::cout << BLUE "Processing file: " RESET << inputFile << std::endl;
 
 	std::string line;
-	std::getline(inFile, line); // Skip title line
+	std::getline(inFile, line); // Skip title line (input file)
 	while (std::getline(inFile, line))
 	{
 		if (!ValidLine(line))
 			continue;
-		std::cout << line << std::endl;
+		size_t pipePos = line.find(" | ");
+		std::string date = line.substr(0, pipePos);
+		float value = std::stof(line.substr(pipePos + 3));
+
+		std::map<std::string, float>::iterator it = exchangeData.lower_bound(date);
+		if (it == exchangeData.end() || (it != exchangeData.begin() && it->first != date))
+			--it;
+		float rate = it->second;
+		float result = value * rate;
+
+		std::cout << date << " => " << value << " = " << result << std::endl;
 	}
+}
+
+// Exception Class Method Overrides
+const char *BitcoinExchange::InvalidArgsException::what() const throw()
+{
+	return RED "Error: " BOLD "Invalid arguments! Please use \"./btc [input file]\"" RESET;
+}
+
+const char *BitcoinExchange::BadDatabaseException::what() const throw()
+{
+	return RED "Error: " BOLD "Could not parse database!" RESET;
+}
+
+const char *BitcoinExchange::InvalidFileException::what() const throw()
+{
+	return RED "Error: " BOLD "Could not open file!" RESET;
 }
