@@ -2,11 +2,9 @@
 
 #include <iostream>
 #include <string>
-#include <map>
+#include <stack>
 #include <limits>
 #include <algorithm>
-#include <fstream>
-#include <regex>
 
 // Colors
 #define RED       "\x1b[31m ✗ "
@@ -21,26 +19,24 @@
 // Format reset
 #define RESET     "\x1b[0m"
 
-class BitcoinExchange
+class RPN
 {
 	private:
-		std::string databaseFile;
-		std::string inputFile;
-		std::map<std::string, float> exchangeData;
+		std::string expression;
+		std::stack<char> tokens;
 	public:
 		//OCF
-		BitcoinExchange();
-		BitcoinExchange(std::string database, std::string input);
-		BitcoinExchange(const BitcoinExchange &src);
-		BitcoinExchange &operator=(const BitcoinExchange &src);
-		~BitcoinExchange();
+		RPN();
+		RPN(std::string input);
+		RPN(const RPN &src);
+		RPN &operator=(const RPN &src);
+		~RPN();
 
-	// Memeber Methods
+	// Members
 	private:
-		std::map<std::string, float> ParseDatabase();
-		bool ValidLine(std::string line);
+		std::stack<char> ParseExpression();
 	public:
-		void BTCExchange();
+		void EvaluateExpression();
 
 		// Exceptions
 		class InvalidArgsException : public std::exception
@@ -48,13 +44,18 @@ class BitcoinExchange
 			public: const char *what() const throw();
 		};
 
-		class BadDatabaseException : public std::exception
+		class InvalidExpressionException : public std::exception
 		{
 			public: const char *what() const throw();
 		};
 
-		class InvalidFileException : public std::exception
+		class NotResolvableException : public std::exception
 		{
 			public: const char *what() const throw();
+		};
+
+		class DivisionByZeroException : public std::exception
+		{
+			public: virtual const char* what() const throw();
 		};
 };

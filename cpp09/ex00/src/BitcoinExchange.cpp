@@ -1,17 +1,17 @@
 #include "BitcoinExchange.hpp"
 
 // Orthodox Canonical Form
-// (default constructor, copy constructor, assignment operator override, destructor)
+// (default constructor, param constructor, copy constructor, assignment operator override, destructor)
 BitcoinExchange::BitcoinExchange() : databaseFile("data.csv"), inputFile("input.txt")
 {
-	exchangeData = ParseDatabase(databaseFile);
+	exchangeData = ParseDatabase();
 	std::cout << BOLD GREEN "Default BitcoinExchange instance constructed." RESET << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(std::string database, std::string input)
 : databaseFile(database), inputFile(input)
 {
-	exchangeData = ParseDatabase(databaseFile);
+	exchangeData = ParseDatabase();
 	std::cout << BOLD GREEN "BitcoinExchange instance constructed." RESET << std::endl;
 }
 
@@ -38,9 +38,9 @@ BitcoinExchange::~BitcoinExchange()
 }
 
 // Memeber Functions
-std::map<std::string, float> BitcoinExchange::ParseDatabase(std::string database)
+std::map<std::string, float> BitcoinExchange::ParseDatabase()
 {
-	std::ifstream db(database);
+	std::ifstream db(databaseFile);
 	if (!db)
 		throw BadDatabaseException();
 

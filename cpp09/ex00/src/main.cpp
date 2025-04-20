@@ -2,6 +2,7 @@
 
 int main(int argc, char **argv)
 {
+	std::cout << CYAN UNDERLINE "Bitcoin Exchange:" RESET << std::endl;
 	try {
 		if (argc != 2)
 			throw BitcoinExchange::InvalidArgsException();
