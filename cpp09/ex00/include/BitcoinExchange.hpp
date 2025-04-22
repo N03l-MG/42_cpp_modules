@@ -10,10 +10,10 @@
 
 // Colors
 #define RED       "\x1b[31m ✗ "
-#define GREEN     "\x1b[32m 🛠 "
+#define GREEN     "\x1b[32m ✓ "
 #define YELLOW    "\x1b[33m ⚠ "
-#define BLUE      "\x1b[34m 🛈 "
-#define MAGENTA   "\x1b[35m 🗑 "
+#define BLUE      "\x1b[34m ◆ "
+#define MAGENTA   "\x1b[35m ⌫ "
 #define CYAN      "\x1b[36m"
 // Styles
 #define BOLD      "\x1b[1m"
