@@ -9,11 +9,11 @@
 #include <regex>
 
 // Colors
-#define RED       "\x1b[31m ✗ "
-#define GREEN     "\x1b[32m ✓ "
-#define YELLOW    "\x1b[33m ⚠ "
-#define BLUE      "\x1b[34m ◆ "
-#define MAGENTA   "\x1b[35m ⌫ "
+#define RED       "\x1b[31m ✗ " // Error or exception
+#define GREEN     "\x1b[32m 🛠 " // Construction
+#define YELLOW    "\x1b[33m ⚠ " // Warning
+#define BLUE      "\x1b[34m 🛈 " // Info or log
+#define MAGENTA   "\x1b[35m 🗑 " // Destruction
 #define CYAN      "\x1b[36m"
 // Styles
 #define BOLD      "\x1b[1m"

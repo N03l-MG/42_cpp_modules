@@ -1,4 +1,3 @@
-#include "PmergeMe.hpp"
 #include "PmergeMe.cpp" // Include template implementations (subject demands a .cpp)
 
 // Independent Parsing Functions
@@ -12,9 +11,9 @@ std::vector<int> ParseToVector(char **argv)
 		char *endptr;
 		long num = std::strtol(argv[i], &endptr, 10);
 		if (*endptr != '\0')
-			throw PmergeMe<std::vector<int>>::InvalidNumberException();
-		if (num <= 0 || num > INT_MAX)
-			throw PmergeMe<std::vector<int>>::InvalidNumberException();
+			throw PmergeMe<std::vector<int>>::InvalidInputException();
+		if (num < 0 || num > INT_MAX)
+			throw PmergeMe<std::vector<int>>::InvalidInputException();
 		numbers.push_back(static_cast<int>(num));
 		i++;
 	}
@@ -34,9 +33,9 @@ std::deque<int> ParseToDeque(char **argv)
 		char *endptr;
 		long num = std::strtol(argv[i], &endptr, 10);
 		if (*endptr != '\0')
-			throw PmergeMe<std::deque<int>>::InvalidNumberException();
-		if (num <= 0 || num > INT_MAX)
-			throw PmergeMe<std::deque<int>>::InvalidNumberException();
+			throw PmergeMe<std::deque<int>>::InvalidInputException();
+		if (num < 0 || num > INT_MAX)
+			throw PmergeMe<std::deque<int>>::InvalidInputException();
 		numbers.push_back(static_cast<int>(num));
 		i++;
 	}

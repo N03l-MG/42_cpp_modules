@@ -103,31 +103,6 @@ Container PmergeMe<Container>::Sort()
 }
 
 template<typename Container>
-void PmergeMe<Container>::SortAndPrint()
-{
-	// Print original sequence (TESTING ONLY)
-	// std::cout << BLUE "Unsorted: " RESET;
-	// for (const auto& num : unsorted)
-	// 	std::cout << num << " ";
-	// std::cout << std::endl;
-
-	// Time the sorting
-	clock_t start = clock();
-	sorted = Sort();
-	clock_t end = clock();
-	double time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
-	// Print sorted sequence
-	std::cout << BLUE "Sorted: " RESET;
-	for (const auto &num : sorted)
-		std::cout << num << " ";
-	std::cout << std::endl;
-	std::cout << BLUE "Time to process a range of " << unsorted.size() 
-			<< " elements with std::" << (std::is_same<Container, std::vector<int>>::value ? "vector" : "deque")
-			<< ": " << std::fixed << std::setprecision(5) << BOLD << time << " μs" RESET << std::endl;
-	CheckResult();
-}
-
-template<typename Container>
 void PmergeMe<Container>::CheckResult()
 {
 	// Check 1: Size should be the same
@@ -143,6 +118,31 @@ void PmergeMe<Container>::CheckResult()
 	std::cout << BLUE "Success: All checks passed!" RESET << std::endl;
 }
 
+template<typename Container>
+void PmergeMe<Container>::SortAndPrint()
+{
+	// Print original sequence (TESTING ONLY)
+	// std::cout << BLUE "Unsorted: " RESET;
+	// for (const auto& num : unsorted)
+	// 	std::cout << num << " ";
+	// std::cout << std::endl;
+
+	// Time the sorting
+	clock_t start = clock();
+	sorted = Sort();
+	clock_t end = clock();
+	int time = static_cast<int>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	// Print sorted sequence
+	std::cout << BLUE "Sorted:" RESET << std::endl;
+	for (const auto &num : sorted)
+		std::cout << num << " ";
+	std::cout << std::endl;
+	std::cout << BLUE "Time to process a range of " BOLD << unsorted.size() 
+			<< " elements with std::" << (std::is_same<Container, std::vector<int>>::value ? "vector" : "deque")
+			<< ": " << RESET BOLD << time << " μs" RESET << std::endl;
+	CheckResult();
+}
+
 // Exception Class Method Overrides
 template<typename Container>
 const char *PmergeMe<Container>::InvalidArgsException::what() const throw()
@@ -151,7 +151,7 @@ const char *PmergeMe<Container>::InvalidArgsException::what() const throw()
 }
 
 template<typename Container>
-const char *PmergeMe<Container>::InvalidNumberException::what() const throw()
+const char *PmergeMe<Container>::InvalidInputException::what() const throw()
 {
-	return RED "Error: " BOLD "Invalid number in unsorted container!" RESET;
+	return RED "Error: " BOLD "Invalid character or value in input!" RESET;
 }
