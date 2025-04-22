@@ -131,7 +131,7 @@ void PmergeMe<Container>::SortAndPrint()
 	clock_t start = clock();
 	sorted = Sort();
 	clock_t end = clock();
-	int time = static_cast<int>(end - start) / CLOCKS_PER_SEC * 1000000.0;
+	double time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
 	// Print sorted sequence
 	std::cout << BLUE "Sorted:" RESET << std::endl;
 	for (const auto &num : sorted)
