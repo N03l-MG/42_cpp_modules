@@ -42,9 +42,9 @@ PmergeMe<Container>::~PmergeMe()
 
 // Member Functions
 template<typename Container>
-std::list<int> PmergeMe<Container>::GenerateJacobsthal()
+std::vector<int> PmergeMe<Container>::GenerateJacobsthal()
 {
-	std::list<int> sequence;
+	std::vector<int> sequence;
 
 	sequence.push_back(0);
 	sequence.push_back(1);

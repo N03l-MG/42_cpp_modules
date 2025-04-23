@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <deque>
-#include <list>
 #include <limits.h>
 #include <algorithm>
 #include <iomanip>
@@ -33,7 +32,7 @@ class PmergeMe
 	private:
 		Container unsorted;
 		Container sorted;
-		std::list<int> jacobsthalSeries;
+		std::vector<int> jacobsthalSeries;
 	public:
 		//OCF
 		PmergeMe();
@@ -44,7 +43,7 @@ class PmergeMe
 
 	// Member Methods
 	private:
-		std::list<int> GenerateJacobsthal();
+		std::vector<int> GenerateJacobsthal();
 		void CheckResult();
 		Container Sort();
 	public:
