@@ -158,7 +158,7 @@ Container PmergeMe<Container>::Sort()
 	// Step 4: Insert smaller elements using binary search
 	std::vector<size_t> insertions;
 	size_t num_pending = pending.size();
-    // Generate insertion sequence using Jacobsthal numbers
+	// Generate insertion sequence using Jacobsthal numbers
 	for (size_t i = 0; i < jacobsthalSeries.size() && insertions.size() < num_pending; ++i)
 	{
 		size_t pos = jacobsthalSeries[i];

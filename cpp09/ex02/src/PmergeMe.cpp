@@ -5,7 +5,7 @@ std::vector<int> ParseToVector(char **argv)
 {
 	std::vector<int> numbers;
 	int i = 1;
-	
+
 	while (argv[i])
 	{
 		char *endptr;
@@ -27,7 +27,7 @@ std::deque<int> ParseToDeque(char **argv)
 {
 	std::deque<int> numbers;
 	int i = 1;
-	
+
 	while (argv[i])
 	{
 		char *endptr;
