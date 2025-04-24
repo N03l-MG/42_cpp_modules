@@ -32,7 +32,6 @@ class PmergeMe
 	private:
 		Container unsorted;
 		Container sorted;
-		std::vector<int> jacobsthalSeries;
 	public:
 		//OCF
 		PmergeMe();
@@ -43,9 +42,9 @@ class PmergeMe
 
 	// Member Methods
 	private:
-		std::vector<int> GenerateJacobsthal();
+		constexpr size_t Jacobsthal(size_t n) noexcept;
+		Container MergeInsertionSort();
 		void CheckResult();
-		Container Sort();
 	public:
 		void SortAndPrint();
 
@@ -70,20 +69,17 @@ template class PmergeMe<std::deque<int>>;
 template<typename Container>
 PmergeMe<Container>::PmergeMe()
 {
-	jacobsthalSeries = GenerateJacobsthal();
 	std::cout << BOLD GREEN "Default PmergeMe instance constructed." RESET << std::endl;
 }
 
 template<typename Container>
 PmergeMe<Container>::PmergeMe(Container const &input) : unsorted(input)
 {
-	jacobsthalSeries = GenerateJacobsthal();
 	std::cout << BOLD GREEN "PmergeMe instance constructed." RESET << std::endl;
 }
 
 template<typename Container>
-PmergeMe<Container>::PmergeMe(const PmergeMe &src) : unsorted(src.unsorted), sorted(src.sorted),
-					jacobsthalSeries(src.jacobsthalSeries)
+PmergeMe<Container>::PmergeMe(const PmergeMe &src) : unsorted(src.unsorted), sorted(src.sorted)
 {
 	std::cout << BOLD GREEN "PmergeMe instance copy-constructed." RESET << std::endl;
 }
@@ -94,7 +90,6 @@ PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe &src)
 	if (this != &src) {
 		this->unsorted = src.unsorted;
 		this->sorted = src.sorted;
-		this->jacobsthalSeries = src.jacobsthalSeries;
 	}
 	return *this;
 }
@@ -107,82 +102,65 @@ PmergeMe<Container>::~PmergeMe()
 
 // Member Functions
 template<typename Container>
-std::vector<int> PmergeMe<Container>::GenerateJacobsthal()
+constexpr size_t PmergeMe<Container>::Jacobsthal(size_t n) noexcept
 {
-	std::vector<int> sequence;
-
-	sequence.push_back(0);
-	sequence.push_back(1);
-	for (size_t i = 2; i < 30; ++i)
-	{
-		int next = sequence.back() + 2 * *std::next(sequence.rbegin());
-		sequence.push_back(next);
+	// J(0) = 0, J(1) = 1, J(n) = J(n‑1) + 2*J(n‑2)
+	size_t a = 0, b = 1;
+	for (std::size_t i = 0; i < n; ++i) {
+		std::size_t next = b + 2 * a;
+		a = b;
+		b = next;
 	}
-	return sequence;
+	return a;
 }
 
 template<typename Container>
-Container PmergeMe<Container>::Sort()
+Container PmergeMe<Container>::MergeInsertionSort()
 {
-	size_t size = unsorted.size();
-	if (size <= 1) return unsorted;
+	if (unsorted.size() <= 1) return unsorted; // Quick single element/empty check.
+	Container temp = unsorted;
+	std::vector<std::pair<int,int>> pairs;
 
-	// Step 1: Create pairs and sort them
-	std::vector<std::pair<int, int>> pairs;
-	for (size_t i = 0; i < size - 1; i += 2)
+	///ONE: Compare pairs of elements in two halves of the container, keep odd element if present.
+	for (std::size_t i = 0; i + 1 < temp.size(); i += 2)
 	{
-		int first = unsorted[i];
-		int second = unsorted[i + 1];
-		if (first > second)
-			pairs.push_back(std::make_pair(first, second));
-		else
-			pairs.push_back(std::make_pair(second, first));
+		if (temp[i] > temp[i+1]) std::swap(temp[i], temp[i+1]);
+		pairs.emplace_back(temp[i], temp[i+1]);
 	}
-	// Handle remainder if exists
-	int extraElement = -1;
-	if (size % 2)
-		extraElement = unsorted[size - 1];
+	int extra = (temp.size() & 1) ? temp.back() : -1;
 
-	// Step 2: Sort pairs by their larger elements
-	std::sort(pairs.begin(), pairs.end());
+	///TWO: Sort each pair by by the bigger element and split into Maxima and Minima
+	Container minima, maxima;
+	std::sort(pairs.begin(), pairs.end(), [](auto const& a, auto const& b) {
+		return a.second < b.second;
+	});
+	for (auto const& p : pairs)
+	{
+		minima.push_back(p.first);
+		maxima.push_back(p.second);
+	}
 
-	// Step 3: Create main chain with larger elements
+	///THREE: Insert minima into maxima using binary search in the order of Jacobsthal indices.
 	Container result;
-	std::vector<int> pending;
-	for (const auto& pair : pairs)
+	if (!pairs.empty()) {
+		result.push_back(minima[0]);
+		result.push_back(maxima[0]);
+	}
+	for (std::size_t k = 1; k < minima.size(); ++k)
 	{
-		result.push_back(pair.first);
-		pending.push_back(pair.second);
+		std::size_t window = Jacobsthal(static_cast<int>(k + 2)) - 1;
+		auto window_end = result.begin() + std::min(window, result.size());
+		auto it_small = std::upper_bound(result.begin(), window_end, minima[k]);
+		it_small = result.insert(it_small, minima[k]);
+		window_end = result.begin() + std::min(window + 1, result.size());
+		auto it_big = std::upper_bound(result.begin(), window_end, maxima[k]);
+		result.insert(it_big, maxima[k]);
 	}
 
-	// Step 4: Insert smaller elements using binary search
-	std::vector<size_t> insertions;
-	size_t num_pending = pending.size();
-	// Generate insertion sequence using Jacobsthal numbers
-	for (size_t i = 0; i < jacobsthalSeries.size() && insertions.size() < num_pending; ++i)
-	{
-		size_t pos = jacobsthalSeries[i];
-		if (pos < num_pending && std::find(insertions.begin(), insertions.end(), pos) == insertions.end())
-			insertions.push_back(pos);
-		// Fill gaps between Jacobsthal numbers
-		if (i > 0)
-			for (size_t j = jacobsthalSeries[i - 1]; j < pos && j < num_pending; ++j)
-				if (std::find(insertions.begin(), insertions.end(), j) == insertions.end())
-					insertions.push_back(j);
-	}
-	// Insert elements according to the Jacobsthal sequence
-	for (size_t idx : insertions)
-	{
-		if (idx < pending.size()) {
-			int element = pending[idx];
-			auto insertPos = std::lower_bound(result.begin(), result.end(), element);
-			result.insert(insertPos, element);
-		}
-	}
-	// Insert remainder if it exists
-	if (extraElement != -1) {
-		auto insertPos = std::lower_bound(result.begin(), result.end(), extraElement);
-		result.insert(insertPos, extraElement);
+	///FOUR: Re-insert extra element if it exists.
+	if (extra != -1) {
+		auto it = std::upper_bound(result.begin(), result.end(), extra);
+		result.insert(it, extra);
 	}
 
 	return result;
@@ -191,12 +169,12 @@ Container PmergeMe<Container>::Sort()
 template<typename Container>
 void PmergeMe<Container>::CheckResult()
 {
-	// Check 1: Size should be the same
+	// Check 1: Size should be the same (no numbers got removed or added)
 	if (sorted.size() != unsorted.size()) {
 		std::cout << RED "Failure: Size mismatch!" RESET << std::endl;
 		return;
 	}
-	// Check 2: Result should be sorted
+	// Check 2: Result should be sorted (ensure it actually works lol)
 	if (!std::is_sorted(sorted.begin(), sorted.end())) {
 		std::cout << RED "Failure: Result is not sorted!" RESET << std::endl;
 		return;
@@ -207,13 +185,18 @@ void PmergeMe<Container>::CheckResult()
 template<typename Container>
 void PmergeMe<Container>::SortAndPrint()
 {
+	if (unsorted.size() == 0) {
+		std::cout << YELLOW "Wanring: " BOLD "Empty container." RESET << std::endl;
+		return;
+	}
 	// Time the sorting
 	clock_t start = clock();
-	sorted = Sort();
+	sorted = MergeInsertionSort();
 	clock_t end = clock();
 	double time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000.0;
 	// Print sorted sequence
-	std::cout << BLUE "Sorted:" RESET << std::endl;
+	std::cout << BLUE "Sorted " << (std::is_same<Container, std::vector<int>>::value ? "Vector" : "Deque")
+			<< ": " RESET << std::endl;
 	for (const auto &num : sorted)
 		std::cout << num << " ";
 	std::cout << std::endl;

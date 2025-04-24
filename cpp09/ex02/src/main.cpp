@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 
-// Program
 int main(int argc, char **argv)
 {
 	std::cout << CYAN UNDERLINE "Ford-Johnson (Merge-Insertion Sort) Algorithm:" RESET << std::endl;
@@ -11,6 +10,7 @@ int main(int argc, char **argv)
 		PmergeMe<std::deque<int>> PmergeMyDeque(ParseToDeque(argv));
 		std::cout << std::endl;
 		PmergeMyVector.SortAndPrint();
+		std::cout << std::endl;
 		PmergeMyDeque.SortAndPrint();
 		std::cout << std::endl;
 	} catch (std::exception &e) {
