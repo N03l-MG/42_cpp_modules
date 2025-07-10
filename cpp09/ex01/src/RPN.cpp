@@ -6,6 +6,7 @@ RPN::RPN() : expression("0")
 {
 	tokens = ParseExpression();
 	std::cout << BOLD GREEN "Default RPN instance constructed." RESET << std::endl;
+	std::cout << YELLOW "Warning: " BOLD "Default RPN does not calculate anything." RESET << std::endl;
 }
 
 RPN::RPN(std::string input) : expression(input)

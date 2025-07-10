@@ -6,6 +6,7 @@ BitcoinExchange::BitcoinExchange() : databaseFile("data.csv"), inputFile("input.
 {
 	exchangeData = ParseDatabase();
 	std::cout << BOLD GREEN "Default BitcoinExchange instance constructed." RESET << std::endl;
+	std::cout << YELLOW "Warning: " BOLD "Default BitcoinExchange uses subject-specific parameters." RESET << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(std::string database, std::string input)

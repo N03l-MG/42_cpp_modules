@@ -186,7 +186,7 @@ template<typename Container>
 void PmergeMe<Container>::SortAndPrint()
 {
 	if (unsorted.size() == 0) {
-		std::cout << YELLOW "Wanring: " BOLD "Empty container." RESET << std::endl;
+		std::cout << YELLOW "Warning: " BOLD "Empty container." RESET << std::endl;
 		return;
 	}
 	// Time the sorting
