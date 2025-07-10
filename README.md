@@ -41,4 +41,18 @@ The main introduction to templates and generic types. Starting off with some bas
 
 ## cpp08
 
+Introduction to the basics of using container structures, in particular vectors, deques and lists. Some simple exercises that involve operating iteratively on containers as well as overriding some functions into other container classes for use in those. The last exercise involves modifying the stack container class to work with an iterator.
 
+## cpp09
+
+The last and by far hardest module. It is mostly focused on container classes and how to find the right use case for each one. Each exercise is different in this one.
+
+### ex00: Bitcoin Exchange
+This exercise intends for us to make use of the map data structure. We can assign key-value pairs of dates and exchange rates of bitcoin provided to us in a database. Our program must be able to take an input of dates and currency (I assume dollars), check the map created from the database and return the exschanged values for each of the dates. It has to be able to find the last matching date and account for invalid dates. Yes, this includes leap years! It shoudl also handle any improper input or values. This is where the exceptions taught in [cpp05](cpp05) come in very handy.
+
+### ex01: Reverse Polish Notation Calculator
+Next up is making an RPN expression calculator. RPN is just an alternative way of writting math expressions, you can look it up for more info. Quite simply, our program takes an expression and evaluates it. The ideal container for this is a stack, for reasons that will become obvious when the RPN format is understood. Much like every other exercise, errors have to be handled.
+
+
+### ex02: Ford-Johnson Sorting Algorithm Demonstration
+The last and (in my opinion) most challenging exercise. This is all about exploring strengths and weaknesses between vectors and deques. We accept an input of unsorted integers and sort them using a very obscure and rather strage algorithm called the Ford-Johnson Sort, or Merge-Insertion as some people call it. The hardest part of this exercise, quite frankly, is even understanding how this algorithm works. There are no simple tutorials online, only extensive (typically VERY math-intensive) papers explaining it. In short, it is a hybrid between insertion and merge sort. It works recursively like merge-sort but only up to a certain point, after which one sorted half of the numbers is inserted in a very specific order into the other. This order involves a very special sequence of numbers called the _Jacobsthal Series_. The reason this extremely overcomplicated algorithm exists in the first place is because it is mathematically the most comparison-efficient sorting algorithm. Essentially, it uses as least comparisons between numbers as possible. Not that it is particularly fast anyway... :P
